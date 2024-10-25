@@ -65,19 +65,26 @@ if __name__ == "__main__":
 
         else:
             while True:
-                numbers.append(input('Podaj pierwsza liczbe: '))
-                numbers.append(input('Podaj druga liczbe: '))
-                if IsConvertable(numbers) == None:
+                while True:
+                    numbers.append(input('Podaj pierwsza liczbe: '))
+                    numbers.append(input('Podaj druga liczbe: '))
+                    if IsConvertable(numbers) == None:
+                        break
+            
+                if int(type_operation) == 4:
+                    try:
+                        result = float(numbers[0]) / float(numbers[1])
+                        logging.info(f'Dziele: {numbers[0]}, {numbers[1]}')
+                        logging.info(f'Wynik to: {result}')
+                        break
+                    except:
+                        logging.error('Nie mozna dzielic przez zero!')
+                elif int(type_operation) == 2:
+                    result = float(numbers[0]) - float(numbers[1])
+                    logging.info(f'Odejmuje: {numbers[0]}, {numbers[1]}')
+                    logging.info(f'Wynik to: {result}')
                     break
-        
-            if int(type_operation) == 4:
-                result = float(numbers[0]) / float(numbers[1])
-                logging.info(f'Dziele: {numbers[0]}, {numbers[1]}')
-                logging.info(f'Wynik to: {result}')
-            elif int(type_operation) == 2:
-                result = float(numbers[0]) - float(numbers[1])
-                logging.info(f'Odejmuje: {numbers[0]}, {numbers[1]}')
-                logging.info(f'Wynik to: {result}')
+                numbers = []
         while True:
             answer = input('Czy chcesz liczyc dalej? T/N: ')
             if answer == 'T' or answer == 't':
