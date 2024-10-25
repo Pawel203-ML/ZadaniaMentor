@@ -70,8 +70,11 @@ if __name__ == "__main__":
                 result = int(numbers[0]) - int(numbers[1])
                 logging.info(f'Odejmuje: {numbers[0]}, {numbers[1]}')
                 logging.info(f'Wynik to: {result}')
-        answer = input('Czy chcesz liczyc dalej? T/N: ')
-        if answer == 'T':
-            pass
-        else:
-            exit()
+        while True:
+            answer = input('Czy chcesz liczyc dalej? T/N: ')
+            if answer == 'T' or answer == 't':
+                break
+            elif answer == 'N' or answer == 'n':
+                exit()
+            else:
+                logging.info('Sprawdz pisownie')
