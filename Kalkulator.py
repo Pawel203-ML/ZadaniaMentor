@@ -18,7 +18,7 @@ def TypeEquasion(value1):
         else:
             logging.error('Liczba spoza zakresu, Spruboj ponownie')
     except:
-        logging.error('niepoprawna komenda, Sprobuj podac liczbe z zakresu')
+        logging.error('Niepoprawna komenda, Sprobuj podac liczbe z zakresu')
 
 numbers = []
 result = 1
@@ -50,6 +50,9 @@ if __name__ == "__main__":
             numbers = input('Podaj liczby: ').split(',')
             if IsConvertable(numbers) == None:
                 break
+        numbers = list(map(int, numbers)) #dziala
+        result = sum(numbers)
+        logging.info(f'Wynik to: {result}')
 
     else:
         while True:
