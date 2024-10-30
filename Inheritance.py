@@ -1,3 +1,6 @@
+from faker import Faker
+fake = Faker()
+
 class AddressBook:
     def __init__(self, name, surname, job, company, mail):
         self.name = name
