@@ -26,7 +26,7 @@ class BaseContact(AddressBook):
 
     @property
     def label_length(self):
-        return self._label_length
+        return f'Dlugosz imeinia i nazwiska to: {self._label_length}'
     @label_length.setter
     def label_length(self, value):
         self._label_length = value
@@ -45,7 +45,7 @@ class BusinessContact(AddressBook):
 
     @property
     def label_length(self):
-        return self._label_length
+        return f'Dlugosz imeinia i nazwiska to: {self._label_length}'
     @label_length.setter
     def label_length(self, value):
         self._label_length = value
