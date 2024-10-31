@@ -79,8 +79,11 @@ BaseContactList = []
 BusinessContactList =[]
 
 #dodawanie wartosci do list
-for i in range(5):
+random_number = fake.random_int(1,5)
+for i in range(random_number):
     BaseContactList.append(BaseContact(name= fake.name(), surname= fake.last_name(), job= fake.job(), company= fake.company(), mail= fake.email(), priv_phone= fake.phone_number()))
+random_number = fake.random_int(1,6)
+for i in range(random_number):
     BusinessContactList.append(BusinessContact(name= fake.name(), surname= fake.last_name(), job= fake.job(), company= fake.company(), mail= fake.email(), business_phone= fake.phone_number()))
 
 SearchingNames()
