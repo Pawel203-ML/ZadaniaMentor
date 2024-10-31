@@ -24,6 +24,13 @@ class BaseContact(AddressBook):
     def __str__(self):
         return f'{self.priv_phone} {self.mail}'
 
+    @property
+    def label_length(self):
+        return self._label_length
+    @label_length.setter
+    def label_length(self, value):
+        self._label_length = value
+
 
 class BusinessContact(AddressBook):
     def __init__(self,business_phone, *args, **kwargs):
@@ -35,6 +42,13 @@ class BusinessContact(AddressBook):
     
     def __str__(self):
         return f'{self.business_phone} {self.company}'
+
+    @property
+    def label_length(self):
+        return self._label_length
+    @label_length.setter
+    def label_length(self, value):
+        self._label_length = value
 
 
 BaseContactList = []
