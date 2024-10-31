@@ -61,6 +61,7 @@ def SearchingNames():
         value += len(person.surname) + 1
         person.label_length = value
         print(person.label_length)
+        print('  ', person.contact())
     print('\n')
     print('--BusinessContact--')
     for person in BusinessContactList:
@@ -69,6 +70,7 @@ def SearchingNames():
         value += len(person.surname) + 1
         person.label_length = value
         print(person.label_length)
+        print('  ', person.contact())
         
         
 
