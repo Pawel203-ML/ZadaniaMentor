@@ -4,6 +4,7 @@ class BaseInfo:
         self.release_date = release_date
         self.category = category
         self.num_views = num_views
+
     def Play(self):
         self.num_views += 1
         return self.num_views
@@ -17,6 +18,13 @@ class Series(BaseInfo):
         super().__init__(*args, **kwargs)
         self.num_odc = num_odc
         self.num_season = num_season
+    
+    def __str__(self):
+        if self.num_odc // 10 < 1:
+            self.num_odc = '0' + self.num_odc
+        if self.num_season // 10 < 1:
+            self.num_season = '0' + self.num_season
+        return f'{self.title} S{self.num_season}E{self.num_odc}'
 
 
 Movies_n_Series = []
