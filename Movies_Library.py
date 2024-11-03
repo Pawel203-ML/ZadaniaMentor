@@ -38,11 +38,6 @@ Movies_n_Series.append(Series(title = 'Sekrety Rodziny', release_date = '28 wrze
 Movies_n_Series.append(Movie(title = 'Sekrety przeszłości', release_date = '14 listopada 2021', category = 'Dramat, Historyczny', num_views = 0))
 Movies_n_Series.append(Series(title = 'Miasto Cieni', release_date = '15 maja 2022', category = 'Thriller, Kryminał', num_views = 0, num_odc = '5', num_season = '1'))
 
-
-
-for movie in Movies_n_Series:
-    print(movie)
-print('----')
 def getMovie():
     for movie in Movies_n_Series:
         if isinstance(movie, Movie) == True:
@@ -54,6 +49,12 @@ def getSeries():
             print(movie)
     print('----')
 
-getMovie()
-getSeries()
-        
+
+if __name__ == '__main__':
+
+    for movie in Movies_n_Series:
+        movie.Play()
+    print('----')
+
+    getMovie()
+    getSeries()
