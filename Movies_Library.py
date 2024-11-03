@@ -8,13 +8,14 @@ class BaseInfo:
     def Play(self):
         self.num_views += 1
         return self.num_views
-
-class Movie(BaseInfo):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, *kwargs)
     
     def __str__(self):
         return f'{self.title} ({self.release_date})'
+
+class Movie(BaseInfo):
+    pass
+    
+    
 
 class Series(BaseInfo):
     def __init__(self, num_odc, num_season, *args, **kwargs):
@@ -23,11 +24,21 @@ class Series(BaseInfo):
         self.num_season = num_season
     
     def __str__(self):
-        if self.num_odc // 10 < 1:
+        if int(self.num_odc) // 10 < 1:
             self.num_odc = '0' + self.num_odc
-        if self.num_season // 10 < 1:
+        if int(self.num_season) // 10 < 1:
             self.num_season = '0' + self.num_season
         return f'{self.title} S{self.num_season}E{self.num_odc}'
 
 
 Movies_n_Series = []
+
+Movies_n_Series.append(Movie(title = 'Mroczne ścieżki', release_date = '20 marca 2023', category = 'Thriller, Mystery', num_views = '12.5 mln'))
+Movies_n_Series.append(Movie(title = 'Miasto przyszłości', release_date = '5 lipca 2022', category = 'Sci-Fi, Akcja', num_views = '22 mln'))
+Movies_n_Series.append(Movie(title = 'Sekrety przeszłości', release_date = '14 listopada 2021', category = 'Dramat, Historyczny', num_views = '9,7 mln'))
+Movies_n_Series.append(Series(title = 'Miasto Cieni', release_date = '15 maja 2022', category = 'Thriller, Kryminał', num_views = '3,4 mln', num_odc = '5', num_season = '2'))
+Movies_n_Series.append(Series(title = 'Sekrety Rodziny', release_date = '28 września 2023', category = 'Dramat, Obyczajowy', num_views = '6,2 mln', num_odc = '7', num_season = '1'))
+Movies_n_Series.append(Series(title = 'Zaginione Opowieści', release_date = '20 lutego 2022', category = 'Fantasy, Przygodowy', num_views = '4,8 mln', num_odc = '3', num_season = '1'))
+
+for movie in Movies_n_Series:
+    print(movie)
