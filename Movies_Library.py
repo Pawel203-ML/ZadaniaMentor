@@ -12,6 +12,9 @@ class BaseInfo:
 class Movie(BaseInfo):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, *kwargs)
+    
+    def __str__(self):
+        return f'{self.title} ({self.release_date})'
 
 class Series(BaseInfo):
     def __init__(self, num_odc, num_season, *args, **kwargs):
