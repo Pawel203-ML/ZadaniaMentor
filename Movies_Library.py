@@ -39,22 +39,37 @@ Movies_n_Series.append(Movie(title = 'Sekrety przeszłości', release_date = '14
 Movies_n_Series.append(Series(title = 'Miasto Cieni', release_date = '15 maja 2022', category = 'Thriller, Kryminał', num_views = 0, num_odc = '5', num_season = '1'))
 
 def getMovie():
+    print('--Filmy--')
     for movie in Movies_n_Series:
         if isinstance(movie, Movie) == True:
             print(movie)
-    print('----')
 def getSeries():
+    print('--Seriale--')
     for movie in Movies_n_Series:
         if isinstance(movie, Movie) == False:
             print(movie)
-    print('----')
+
+def search():
+    searching_again = True
+    while searching_again:
+        searching = input('Podaj nazwe filmu lub serialu: ')
+        for movies_series in Movies_n_Series:
+            if movies_series.title == searching:
+                print(movies_series)
+                break
+            elif movies_series.title != searching and movies_series == Movies_n_Series[-1]:
+                print('Film nie został znaleziony')
+        searching_again = input('Czy chcesz kontynuowac T/N: ')
+        if searching_again.upper()  == 'N':
+            searching_again = False   
 
 
 if __name__ == '__main__':
 
     for movie in Movies_n_Series:
         movie.Play()
-    print('----')
 
     getMovie()
     getSeries()
+    search()
+
