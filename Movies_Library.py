@@ -76,10 +76,28 @@ def generate_views():
     element = fake.random_int(0, len(Movies_n_Series) - 1)
     Movies_n_Series[element].Play = number
 
+def auto_generate_views():
+    for i in range(10):
+        generate_views()
+
+'''def top_titles():
+
+    top_title = ('', 0)
+    for element in Movies_n_Series:
+        
+
+
+    user = input('Wybierz czy chcesz zobaczyc najbardziej odwarzany film czy serial (S/M): ')
+    if user.upper() == 'S':
+        pass
+    elif user.upper() == 'M':
+        pass
+    else:
+        print('Podana wartosc nie jest zgodna z kluczem, sprobuj jeszcze raz')'''
 
 if __name__ == '__main__':
 
     getMovie()
     getSeries()
-    generate_views()
+    auto_generate_views()
     search()
