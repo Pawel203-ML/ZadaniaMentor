@@ -80,24 +80,40 @@ def auto_generate_views():
     for i in range(10):
         generate_views()
 
-'''def top_titles():
+def top_titles():
 
-    top_title = ('', 0)
-    for element in Movies_n_Series:
-        
+    while True:
+        top_title_movie = ('', 0)
+        top_title_series = ('', 0)
+        for element in Movies_n_Series:
+            if isinstance(element, Movie) == True:
+                if top_title_movie[1] == 0:
+                    top_title_movie = (element.title, element.num_views)
+                elif top_title_movie[1] < element.num_views:
+                    top_title_movie = (element.title, element.num_views)
+            else:
+                if top_title_series[1] == 0:
+                    top_title_series = (element.title, element.num_views)
+                elif top_title_series[1] < element.num_views:
+                    top_title_series = (element.title, element.num_views)
 
+        user = input('Wybierz czy chcesz zobaczyc najbardziej odwarzany film czy serial (S/M): ')
+        if user.upper() == 'S':
+            print(f'Najbardziej ogladany serial to: {top_title_series}')
+        elif user.upper() == 'M':
+            print(f'Najbardziej ogladany film to: {top_title_movie}')
+        else:
+            print('Podana wartosc nie jest zgodna z kluczem, sprobuj jeszcze raz')
+            continue
+        user = input('Czy chcesz kopntynuowac? T/N: ')
+        if user.upper() == 'N':
+            break
 
-    user = input('Wybierz czy chcesz zobaczyc najbardziej odwarzany film czy serial (S/M): ')
-    if user.upper() == 'S':
-        pass
-    elif user.upper() == 'M':
-        pass
-    else:
-        print('Podana wartosc nie jest zgodna z kluczem, sprobuj jeszcze raz')'''
 
 if __name__ == '__main__':
 
-    getMovie()
+    '''getMovie()
     getSeries()
+    search()'''
     auto_generate_views()
-    search()
+    top_titles()
