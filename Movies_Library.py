@@ -1,6 +1,9 @@
 from faker import Faker
 fake = Faker()
 
+from datetime import date
+time = date.today()
+
 Movies_n_Series = []
 
 class BaseInfo:
@@ -81,40 +84,43 @@ def top_titles(content_type):
             top_title = (element.title, element.num_views)
         elif isinstance(element, content_type) == True and element.num_views > top_title[1]:
             top_title = (element.title, element.num_views)
-    if content_type == Series:
-        name = 'serial'
-    else:
-        name = 'film'
-    print(f'Najbardziej ogladany {name} to {top_title}')
+    return top_title
     
+def  top_titles_inputUser():
+    while True:
+        user = input('Wybierz czy chcesz zobaczyc najbardziej odwarzany film czy serial (S/M): ')
+        if user.upper() == 'S':
+            print(f'Najpopularniejszy serial to {top_titles(Series)}')
+        elif user.upper() == 'M':
+            print(f'Najpopularniejszy film to {top_titles(Movie)}')
+        else:
+            print('Podana wartosc nie jest zgodna z kluczem, sprobuj jeszcze raz')
+            continue
+        user = input('Czy chcesz kontynuowac? T/N: ')
+        if user.upper() == 'N':
+            break
 
 if __name__ == '__main__':
 
     print('---Biblioteka filmow---')
 
     Movies_n_Series.append(Movie(title = 'Mroczne ścieżki', release_date = '20 marca 2023', category = 'Thriller, Mystery', num_views = 0))
-    Movies_n_Series.append(Series(title = 'Zaginione Opowieści', release_date = '20 lutego 2022', category = 'Fantasy, Przygodowy', num_views = 0, num_odc = '3', num_season = '1'))
+    Movies_n_Series.append(Series(title = 'Zaginione Opowieści', release_date = '20 lutego 2022', category = 'Fantasy, Przygodowy', num_views = 0, num_odc = '15', num_season = '12'))
     Movies_n_Series.append(Movie(title = 'Miasto przyszłości', release_date = '5 lipca 2022', category = 'Sci-Fi, Akcja', num_views = 0))
-    Movies_n_Series.append(Series(title = 'Sekrety Rodziny', release_date = '28 września 2023', category = 'Dramat, Obyczajowy', num_views = 0, num_odc = '7', num_season = '1'))
+    Movies_n_Series.append(Series(title = 'Sekrety Rodziny', release_date = '28 września 2023', category = 'Dramat, Obyczajowy', num_views = 0, num_odc = '8', num_season = '4'))
     Movies_n_Series.append(Movie(title = 'Sekrety przeszłości', release_date = '14 listopada 2021', category = 'Dramat, Historyczny', num_views = 0))
-    Movies_n_Series.append(Series(title = 'Miasto Cieni', release_date = '15 maja 2022', category = 'Thriller, Kryminał', num_views = 0, num_odc = '5', num_season = '1'))
+    Movies_n_Series.append(Series(title = 'Miasto Cieni', release_date = '15 maja 2022', category = 'Thriller, Kryminał', num_views = 0, num_odc = '28', num_season = '15'))
 
-
-    '''getMovie()
-    getSeries()
-    search()'''
     auto_generate_views()
-    while True:
-        user = input('Wybierz czy chcesz zobaczyc najbardziej odwarzany film czy serial (S/M): ')
-        if user.upper() == 'S':
-            top_titles(Series)
-        elif user.upper() == 'M':
-            top_titles(Movie)
-        else:
-            print('Podana wartosc nie jest zgodna z kluczem, sprobuj jeszcze raz')
-            continue
-        user = input('Czy chcesz kopntynuowac? T/N: ')
-        if user.upper() == 'N':
-            break
-    for element in Movies_n_Series:
-        print(element.num_views)
+    print(f'Najpopularniejsze filmy i seriale dnia {time}: \n Film: {top_titles(Movie)} \n Serial: {top_titles(Series)}')
+    sorted_elements = sorted(Movies_n_Series, key= lambda element: element.num_views)
+    print('--Top 3--')
+    print(sorted_elements[-1], '--', sorted_elements[-1].num_views)
+    print(sorted_elements[-2], '--', sorted_elements[-2].num_views)
+    print(sorted_elements[-3], '--', sorted_elements[-3].num_views)
+
+    getMovie()
+    getSeries()
+
+    
+    
