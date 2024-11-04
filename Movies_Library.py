@@ -5,7 +5,7 @@ from datetime import date
 time = date.today()
 
 Movies_n_Series = []
-SeriesList = []
+TempList = []
 
 class BaseInfo:
     def __init__(self, title, release_date, category, num_views):
@@ -104,13 +104,28 @@ def AddingEpisodes(name, year, kind, num_episode, num_season, num_plays):
     #musi byc dodane odcinki dla kazdego serialu
     for i in range(1,int(num_season) + 1):
         for j in range(1,int(num_episode) + 1):
-            SeriesList.append(Series(title = name, release_date = year, category = kind, num_views = num_plays, num_odc = str(j), num_season = str(i)))
+            TempList.append(Series(title = name, release_date = year, category = kind, num_views = num_plays, num_odc = str(j), num_season = str(i)))
 
 def AddingEpisodesLaunching(library):
     for element in library:
         if isinstance(element, Series):
             AddingEpisodes(element.title, element.release_date, element.category, element.num_odc, element.num_season, 0)
+        else:
+            TempList.append(element)
     
+def AvaliableSeries():
+    temp = []
+    for element in Movies_n_Series:
+        if isinstance(element, Series):
+            if len(temp) == 0:
+                temp.append(element.title)
+                continue
+            for i in range(len(temp)):
+                if element.title != temp[i] and i == len(temp) - 1:
+                    temp.append(element.title)
+            
+    for i in temp:
+        print(i)
 
 
 
@@ -118,6 +133,7 @@ def AddingEpisodesLaunching(library):
 
 if __name__ == '__main__':
 
+    actual_series = ''
     print('---Biblioteka filmow---')
 
     Movies_n_Series.append(Movie(title = 'Mroczne ścieżki', release_date = '20 marca 2023', category = 'Thriller, Mystery', num_views = 0))
@@ -136,5 +152,23 @@ if __name__ == '__main__':
     print(sorted_elements[-3], '--', sorted_elements[-3].num_views)
 
     AddingEpisodesLaunching(Movies_n_Series)
+    Movies_n_Series = TempList
     print('--Wybierz serial do obejrzenia--')
+    AvaliableSeries()
+    while True:
+        i = 0
+        actual_series = input('Wpisz nazwe: ')
+        for element in Movies_n_Series:
+            if element.title == actual_series:
+                print(element)
+                i += 1
+        if i > 0:
+            break
+        print('Podana fraza nie została znaleziona sprobuj ponownie..')
+    
+        
+
+
+
+
     
