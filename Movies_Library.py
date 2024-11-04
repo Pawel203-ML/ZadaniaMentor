@@ -5,7 +5,7 @@ from datetime import date
 time = date.today()
 
 Movies_n_Series = []
-Series = []
+SeriesList = []
 
 class BaseInfo:
     def __init__(self, title, release_date, category, num_views):
@@ -104,13 +104,14 @@ def AddingEpisodes(name, year, kind, num_episode, num_season, num_plays):
     #musi byc dodane odcinki dla kazdego serialu
     for i in range(1,int(num_season) + 1):
         for j in range(1,int(num_episode) + 1):
-            Series.append(Series(title = name, release_date = year, category = kind, num_views = num_plays, num_odc = str(j), num_season = str(i)))
+            SeriesList.append(Series(title = name, release_date = year, category = kind, num_views = num_plays, num_odc = str(j), num_season = str(i)))
 
 def AddingEpisodesLaunching(library):
     for element in library:
         if isinstance(element, Series):
             AddingEpisodes(element.title, element.release_date, element.category, element.num_odc, element.num_season, 0)
     
+
 
 
 
