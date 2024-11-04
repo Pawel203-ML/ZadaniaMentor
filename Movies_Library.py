@@ -5,6 +5,7 @@ from datetime import date
 time = date.today()
 
 Movies_n_Series = []
+Series = []
 
 class BaseInfo:
     def __init__(self, title, release_date, category, num_views):
@@ -41,13 +42,12 @@ class Series(BaseInfo):
             self.num_season = '0' + self.num_season
         return f'{self.title} S{self.num_season}E{self.num_odc}'
 
-def getMovie():
+def getMovie(library):
     print('--Filmy--')
-    for movie in Movies_n_Series:
+    for movie in library:
         if isinstance(movie, Movie) == True:
             print(movie)
 def getSeries():
-    print('--Seriale--')
     for movie in Movies_n_Series:
         if isinstance(movie, Movie) == False:
             print(movie)
@@ -100,6 +100,21 @@ def  top_titles_inputUser():
         if user.upper() == 'N':
             break
 
+def AddingEpisodes(name, year, kind, num_episode, num_season, num_plays):
+    #musi byc dodane odcinki dla kazdego serialu
+    for i in range(1,int(num_season) + 1):
+        for j in range(1,int(num_episode) + 1):
+            Series.append(Series(title = name, release_date = year, category = kind, num_views = num_plays, num_odc = str(j), num_season = str(i)))
+
+def AddingEpisodesLaunching(library):
+    for element in library:
+        if isinstance(element, Series):
+            AddingEpisodes(element.title, element.release_date, element.category, element.num_odc, element.num_season, 0)
+    
+
+
+
+
 if __name__ == '__main__':
 
     print('---Biblioteka filmow---')
@@ -119,8 +134,6 @@ if __name__ == '__main__':
     print(sorted_elements[-2], '--', sorted_elements[-2].num_views)
     print(sorted_elements[-3], '--', sorted_elements[-3].num_views)
 
-    getMovie()
-    getSeries()
-
-    
+    AddingEpisodesLaunching(Movies_n_Series)
+    print('--Wybierz serial do obejrzenia--')
     
