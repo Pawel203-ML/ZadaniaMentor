@@ -1,3 +1,6 @@
+from faker import Faker
+fake = Faker()
+
 class BaseInfo:
     def __init__(self, title, release_date, category, num_views):
         self.title = title
@@ -5,10 +8,15 @@ class BaseInfo:
         self.category = category
         self.num_views = num_views
 
+    @property
     def Play(self):
         self.num_views += 1
-        return f'Liczba wyswietlen: {self.num_views}'
+        return self.num_views
     
+    @Play.setter
+    def Play(self,value):
+        self.num_views += value
+            
     def __str__(self):
         return f'{self.title} ({self.release_date})'
 
@@ -63,13 +71,15 @@ def search():
         if searching_again.upper()  == 'N':
             searching_again = False   
 
+def generate_views():
+    number = fake.random_int(1, 101)
+    element = fake.random_int(0, len(Movies_n_Series) - 1)
+    Movies_n_Series[element].Play = number
+
 
 if __name__ == '__main__':
 
-    for movie in Movies_n_Series:
-        movie.Play()
-
     getMovie()
     getSeries()
+    generate_views()
     search()
-
