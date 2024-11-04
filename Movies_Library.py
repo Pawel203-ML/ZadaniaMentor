@@ -22,9 +22,9 @@ class Series(BaseInfo):
         self.num_season = num_season
     
     def __str__(self):
-        if int(self.num_odc) // 10 < 1:
+        if len(self.num_odc) == 1:
             self.num_odc = '0' + self.num_odc
-        if int(self.num_season) // 10 < 1:
+        if len(self.num_season) == 1:
             self.num_season = '0' + self.num_season
         return f'{self.title} S{self.num_season}E{self.num_odc}'
 
