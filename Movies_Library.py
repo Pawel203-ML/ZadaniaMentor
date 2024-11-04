@@ -1,6 +1,8 @@
 from faker import Faker
 fake = Faker()
 
+Movies_n_Series = []
+
 class BaseInfo:
     def __init__(self, title, release_date, category, num_views):
         self.title = title
@@ -35,16 +37,6 @@ class Series(BaseInfo):
         if len(self.num_season) == 1:
             self.num_season = '0' + self.num_season
         return f'{self.title} S{self.num_season}E{self.num_odc}'
-
-
-Movies_n_Series = []
-
-Movies_n_Series.append(Movie(title = 'Mroczne ścieżki', release_date = '20 marca 2023', category = 'Thriller, Mystery', num_views = 0))
-Movies_n_Series.append(Series(title = 'Zaginione Opowieści', release_date = '20 lutego 2022', category = 'Fantasy, Przygodowy', num_views = 0, num_odc = '3', num_season = '1'))
-Movies_n_Series.append(Movie(title = 'Miasto przyszłości', release_date = '5 lipca 2022', category = 'Sci-Fi, Akcja', num_views = 0))
-Movies_n_Series.append(Series(title = 'Sekrety Rodziny', release_date = '28 września 2023', category = 'Dramat, Obyczajowy', num_views = 0, num_odc = '7', num_season = '1'))
-Movies_n_Series.append(Movie(title = 'Sekrety przeszłości', release_date = '14 listopada 2021', category = 'Dramat, Historyczny', num_views = 0))
-Movies_n_Series.append(Series(title = 'Miasto Cieni', release_date = '15 maja 2022', category = 'Thriller, Kryminał', num_views = 0, num_odc = '5', num_season = '1'))
 
 def getMovie():
     print('--Filmy--')
@@ -85,16 +77,28 @@ def top_titles(content_type):
     top_title = ('', 0)
     name = ''
     for element in Movies_n_Series:
-        if isinstance(element, content_type) == True:
+        if isinstance(element, content_type) == True and top_title[1] == 0:
+            top_title = (element.title, element.num_views)
+        elif isinstance(element, content_type) == True and element.num_views > top_title[1]:
             top_title = (element.title, element.num_views)
     if content_type == Series:
         name = 'serial'
     else:
         name = 'film'
-    print(f'Njabardziej ogladany {name} to {top_title}')
+    print(f'Najbardziej ogladany {name} to {top_title}')
     
 
 if __name__ == '__main__':
+
+    print('---Biblioteka filmow---')
+
+    Movies_n_Series.append(Movie(title = 'Mroczne ścieżki', release_date = '20 marca 2023', category = 'Thriller, Mystery', num_views = 0))
+    Movies_n_Series.append(Series(title = 'Zaginione Opowieści', release_date = '20 lutego 2022', category = 'Fantasy, Przygodowy', num_views = 0, num_odc = '3', num_season = '1'))
+    Movies_n_Series.append(Movie(title = 'Miasto przyszłości', release_date = '5 lipca 2022', category = 'Sci-Fi, Akcja', num_views = 0))
+    Movies_n_Series.append(Series(title = 'Sekrety Rodziny', release_date = '28 września 2023', category = 'Dramat, Obyczajowy', num_views = 0, num_odc = '7', num_season = '1'))
+    Movies_n_Series.append(Movie(title = 'Sekrety przeszłości', release_date = '14 listopada 2021', category = 'Dramat, Historyczny', num_views = 0))
+    Movies_n_Series.append(Series(title = 'Miasto Cieni', release_date = '15 maja 2022', category = 'Thriller, Kryminał', num_views = 0, num_odc = '5', num_season = '1'))
+
 
     '''getMovie()
     getSeries()
@@ -112,3 +116,5 @@ if __name__ == '__main__':
         user = input('Czy chcesz kopntynuowac? T/N: ')
         if user.upper() == 'N':
             break
+    for element in Movies_n_Series:
+        print(element.num_views)
