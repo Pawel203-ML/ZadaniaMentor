@@ -127,14 +127,18 @@ def IsExistingEpisode(current_series, answer_user):
     season, episode = answer_user.split(',')
     season = int(season.strip())  # Konwersja na int
     episode = int(episode.strip())  # Konwersja na int
+    found = False
 
     for element in Movies_n_Series:
         if (element.title == current_series 
             and isinstance(element, Series)
             and element.num_season == season 
             and element.num_odc == episode):
-            return True
-    return False
+            element.Play = 1
+            print(f'{element} ma ilosc odtworzen: {element.num_views}')
+            found = True
+    if not found:
+        print('Podany odcinek nie istnieje')
 
 
 
@@ -153,10 +157,7 @@ def AvialiableEpisodes():
     print('Podaj numer sezonu, a po przecinku numer odcinka (np. 2,5)')
     user = input('Podaj numer odcinka do obejrzenia: ')
     
-    if IsExistingEpisode(actual_series, user):
-        print('Istnieje')
-    else:
-        print('Nie istnieje')
+    IsExistingEpisode(actual_series, user)
 
 
 
