@@ -32,15 +32,11 @@ class Movie(BaseInfo):
 class Series(BaseInfo):
     def __init__(self, num_odc, num_season, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.num_odc = num_odc
-        self.num_season = num_season
+        self.num_odc = int(num_odc)  
+        self.num_season = int(num_season)
     
     def __str__(self):
-        if len(self.num_odc) == 1:
-            self.num_odc = '0' + self.num_odc
-        if len(self.num_season) == 1:
-            self.num_season = '0' + self.num_season
-        return f'{self.title} S{self.num_season}E{self.num_odc}'
+        return f'{self.title} S{self.num_season:02}E{self.num_odc:02}'
 
 def getMovie(library):
     print('--Filmy--')
@@ -127,6 +123,21 @@ def AvaliableSeries():
     for i in temp:
         print(i)
 
+def IsExistingEpisode(current_series, answer_user):
+    season, episode = answer_user.split(',')
+    season = int(season.strip())  # Konwersja na int
+    episode = int(episode.strip())  # Konwersja na int
+
+    for element in Movies_n_Series:
+        if (element.title == current_series 
+            and isinstance(element, Series)
+            and element.num_season == season 
+            and element.num_odc == episode):
+            return True
+    return False
+
+
+
 def AvialiableEpisodes():
     while True:
         i = 0
@@ -137,20 +148,21 @@ def AvialiableEpisodes():
                 i += 1
         if i > 0:
             break
-        print('Podana fraza nie została znaleziona sprobuj ponownie..')
-    print('Podaj numer sezonu a po przecinku numer odcinka')
+        print('Podana fraza nie została znaleziona, spróbuj ponownie.')
+    
+    print('Podaj numer sezonu, a po przecinku numer odcinka (np. 2,5)')
+    user = input('Podaj numer odcinka do obejrzenia: ')
+    
+    if IsExistingEpisode(actual_series, user):
+        print('Istnieje')
+    else:
+        print('Nie istnieje')
 
-def IsExistingEpisode(library, series, number_episode):
 
 
-
-
-
-
-
+    
 if __name__ == '__main__':
 
-    actual_series = ''
     print('---Biblioteka filmow---')
 
     Movies_n_Series.append(Movie(title = 'Mroczne ścieżki', release_date = '20 marca 2023', category = 'Thriller, Mystery', num_views = 0))
@@ -172,13 +184,10 @@ if __name__ == '__main__':
     Movies_n_Series = TempList
     print('--Wybierz serial do obejrzenia--')
     AvaliableSeries()
+    AvialiableEpisodes()
     
-    user = input('Podaj numer odcinka do obejrzenia: ')
-    IsExistingEpisode(Movies_n_Series,actual_series, user)
-    #pameitaj ze wartosc z user musi byc rozdzielona za pomoca split na wartosc sezonu i numer odcinka
     #IsExistingEpisode() nie została zapisana w commicie
         
-
 
 
 
