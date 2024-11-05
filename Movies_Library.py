@@ -127,6 +127,23 @@ def AvaliableSeries():
     for i in temp:
         print(i)
 
+def AvialiableEpisodes():
+    while True:
+        i = 0
+        actual_series = input('Wpisz nazwe: ')
+        for element in Movies_n_Series:
+            if element.title == actual_series:
+                print(element)
+                i += 1
+        if i > 0:
+            break
+        print('Podana fraza nie została znaleziona sprobuj ponownie..')
+    print('Podaj numer sezonu a po przecinku numer odcinka')
+
+def IsExistingEpisode(library, series, number_episode):
+
+
+
 
 
 
@@ -155,17 +172,11 @@ if __name__ == '__main__':
     Movies_n_Series = TempList
     print('--Wybierz serial do obejrzenia--')
     AvaliableSeries()
-    while True:
-        i = 0
-        actual_series = input('Wpisz nazwe: ')
-        for element in Movies_n_Series:
-            if element.title == actual_series:
-                print(element)
-                i += 1
-        if i > 0:
-            break
-        print('Podana fraza nie została znaleziona sprobuj ponownie..')
     
+    user = input('Podaj numer odcinka do obejrzenia: ')
+    IsExistingEpisode(Movies_n_Series,actual_series, user)
+    #pameitaj ze wartosc z user musi byc rozdzielona za pomoca split na wartosc sezonu i numer odcinka
+    #IsExistingEpisode() nie została zapisana w commicie
         
 
 
